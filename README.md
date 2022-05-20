@@ -1,4 +1,4 @@
-# postman
+# postman - HOMEWORK 1
 ## Создать запросы в Postman
 ## Protocol: http
 ## IP: 162.55.220.72
@@ -215,3 +215,59 @@ ___
      "qa_salary_after_3.5_years": 7600.0,
      "qa_salary_after_6_months": 4000,
      "start_qa_salary": 2000}
+___
+# postman - HOMEWORK 2
+Подготовка:
+- Создать новую коллекцию: 
+   нажать + во вкладке коллекций
+  
+    |Collections|+|
+    |-----------|-|
+
+- Переименовать коллекцию в Homework_2: ctrl+E
+---
+## http://162.55.220.72:5005/first
+## 1. Отправить запрос
+- Cоздать запрос GET
+- В поле Request URL ввести протокол, ip, порт, эндпоинт: http://162.55.220.72:5005/first
+- ctrl+s
+- ctrl+Enter
+  
+## Ответ:  
+
+    This is the first responce from server!
+## 2. Статус код 200
+- зайти на вкладку Tests
+- выбрать сниппет Status code: Code is 200
+  
+        pm.test("Status code is 200", function () {
+        pm.response.to.have.status(200);
+        });
+- ctrl+s
+- ctrl+Enter
+## Перейти во вкладку Test Results:
+    Status code is 200
+## 3. Проверить, что в body приходит правильный string
+- выбрать сниппет Response body: Contains string
+
+        pm.test("Body matches string", function () {
+        pm.expect(pm.response.text()).to.include("This is the first responce from server!");
+        });
+- ctrl+s
+- ctrl+Enter
+## Перейти во вкладку Test Results:
+    Body matches string
+___
+## http://162.55.220.72:5005/user_info_3
+## 1. Отправить запрос
+## 2. Статус код 200
+## 3. Спарсить response body в json
+## 4. Проверить, что name в ответе равно name s request (name вбить руками)
+## 5. Проверить, что age в ответе равно age s request (age вбить руками)
+## 6. Проверить, что salary в ответе равно salary s request (salary вбить руками)
+## 7. Спарсить request
+## 8. Проверить, что name в ответе равно name s request (name забрать из request)
+## 9. Проверить, что age в ответе равно age s request (age забрать из request)
+## 10. Проверить, что salary в ответе равно salary s request (salary забрать из request)
+## 11. Вывести в консоль параметр family из response
+## 12. Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)
