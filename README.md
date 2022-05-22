@@ -289,7 +289,10 @@ ___
 - Вывести результат в консоль:
   
       console.log(responseData)
+- ctrl+s
+- ctrl+Enter
 ### Console:
+
     {age: "30", family: {…}, name: "Natalya"…}
         age: "30"
         family: {…}
@@ -303,9 +306,7 @@ ___
             u_salary_1_5_year: 8000
         name: "Natalya"
         salary: 2000
-
-
-### 2.4 Проверить, что name в ответе равно name s request (name вбить руками)
+### 2.4 Проверить, что name в ответе равно name в request (name вбить руками)
 - Из сниппета "Response body: JSON value check" выбрать строки и отредактировать название теста, название и предполагаемое значение параметра:
   
       pm.test("Name checking", function ()
@@ -314,7 +315,7 @@ ___
 - ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Name checking
-### 2.5 Проверить, что age в ответе равно age s request (age вбить руками)
+### 2.5 Проверить, что age в ответе равно age в request (age вбить руками)
 - Из сниппета "Response body: JSON value check" выбрать строки и отредактировать название теста, название и предполагаемое значение параметра:
   
       pm.test("Age checking", function ()
@@ -323,7 +324,7 @@ ___
 - ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Age checking
-### 2.6 Проверить, что salary в ответе равно salary s request (salary вбить руками)
+### 2.6 Проверить, что salary в ответе равно salary в request (salary вбить руками)
 - Из сниппета "Response body: JSON value check" выбрать строки и отредактировать название теста, название и предполагаемое значение параметра:
   
       pm.test("Salary checking", function ()
@@ -334,29 +335,39 @@ ___
     PASS Salary checking
 ### 2.7 Спарсить request
     let requestData = request.data;
-    console.log("request: ", requestData)
+    console.log(requestData)
+- ctrl+s
+- ctrl+Enter
 ### Console:
-    request: {name: "Natalya", age: "30", salary: "2000"}
-                name: "Natalya"
-                age: "30"
-                salary: "2000"
-### 2.8 Проверить, что name в ответе равно name s request (name забрать из request)
+    {name: "Natalya", age: "30", salary: "2000"}
+        name: "Natalya"
+        age: "30"
+        salary: "2000"
+### 2.8 Проверить, что name в ответе равно name в request (name забрать из request)
     pm.test("Name from response equals name from request", function ()
     {pm.expect(responseData.name).to.eql(requestData.name);});
+- ctrl+s
+- ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Name from response equals name from request
-### 2.9 Проверить, что age в ответе равно age s request (age забрать из request)
+### 2.9 Проверить, что age в ответе равно age в request (age забрать из request)
     pm.test("Age from response equals age from request", function ()
     {pm.expect(responseData.age).to.eql(requestData.age);});
+- ctrl+s
+- ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Age from response equals age from request
-### 2.10 Проверить, что salary в ответе равно salary s request (salary забрать из request)
+### 2.10 Проверить, что salary в ответе равно salary в request (salary забрать из request)
     pm.test("Salary from response equals salary from request", function ()
     {pm.expect(responseData.salary).to.eql(+requestData.salary);});
+- ctrl+s
+- ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Salary from response equals salary from request
 ### 2.11 Вывести в консоль параметр family из response
     console.log(responseData.family)
+- ctrl+s
+- ctrl+Enter
 ### Console:
      
     {children: [2], u_salary_1_5_year: 8000}
@@ -371,29 +382,143 @@ ___
 ### 2.12 Проверить что u_salary_1_5_year в ответе равно salary*4 (salary забрать из request)
     pm.test("Salary after 1.5 years from response equals salary*4 from request", function ()
     {pm.expect(responseData.family.u_salary_1_5_year).to.eql(requestData.salary*4);});
+- ctrl+s
+- ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Salary after 1.5 years from response equals salary*4 from request
 ___
 ## http://162.55.220.72:5005/object_info_3
-### 1. Отправить запрос
-### 2. Статус код 200
-### 3. Спарсить response body в json
-### 4. Спарсить request
-### 5. Проверить, что name в ответе равно name s request (name забрать из request)
-### 6. Проверить, что age в ответе равно age s request (age забрать из request)
-### 7. Проверить, что salary в ответе равно salary s request (salary забрать из request)
-### 8. Вывести в консоль параметр family из response
-### 9. Проверить, что у параметра dog есть параметры name
-### 10. Проверить, что у параметра dog есть параметры age
-### 11. Проверить, что параметр name имеет значение Luky
-### 12. Проверить, что параметр age имеет значение 4
+### 3.1 Отправить запрос
+- Cоздать запрос GET
+- В поле Request URL ввести протокол, ip, порт, эндпоинт: http://162.55.220.72:5005/object_info_3
+- Во вкладке Params ввести ключи и значения:
+  
+    |key |value  |
+    |:----:|:-------:|
+    |name|Natalya|
+    |age |30     |
+    |salary |2000     |
+- ctrl+s
+- ctrl+Enter
+  
+### Response:
+    {"age": "30",
+     "family": {"children": [["Alex",24],
+                            ["Kate",12]],
+                "pets": {"cat": {"age": 3,
+                                 "name": "Sunny"},
+                         "dog": {"age": 4,"name": "Luky"}},
+     "u_salary_1_5_year": 8000},
+     "name": "Natalya",
+     "salary": 2000}
+### 3.2 Статус код 200
+- Перейти на вкладку Tests
+- Выбрать сниппет "Status code: Code is 200":
+  
+        pm.test("Status code is 200", function ()
+        {pm.response.to.have.status(200);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Status code is 200
+### 3.3 Спарсить response body в json
+- Из сниппета "Response body: JSON value check" выбрать строку, отредактировав название переменной:
+    
+      let responseData = pm.response.json();
+
+- Вывести результат в консоль:
+  
+      console.log(responseData)
+- ctrl+s
+- ctrl+Enter
+### Console:
+    {age: "30", family: {…}, name: "Natalya"…}
+        age: "30"
+        family: {…}
+            children: [2]
+                0: [2]
+                    0: "Alex"
+                    1: 24
+                1: [2]
+                    0: "Kate"
+                    1: 12
+            pets: {…}
+                cat: {…}
+                    age: 3
+                    name: "Sunny"
+                dog: {…}
+                    age: 4
+                    name: "Luky"
+        u_salary_1_5_year: 8000
+        name: "Natalya"
+        salary: 2000
+### 3.4 Спарсить request
+    let requestData = pm.request.url.query.toObject()
+    console.log(requestData)
+- ctrl+s
+- ctrl+Enter
+### Console:
+ 
+    {name: "Natalya", age: "30", salary: "2000"}
+        name: "Natalya"
+        age: "30"
+        salary: "2000"    
+    
+### 3.5 Проверить, что name в ответе равно name в request (name забрать из request)
+      pm.test("Name from response equals name from request", function ()
+      {pm.expect(responseData.name).to.eql(requestData.name);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Name from response equals name from request
+### 3.6 Проверить, что age в ответе равно age в request (age забрать из request)
+      pm.test("Age from response equals age from request", function ()
+      {pm.expect(responseData.age).to.eql(requestData.age);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Age from response equals age from request
+### 3.7 Проверить, что salary в ответе равно salary в request (salary забрать из request)
+    pm.test("Salary from response equals salary from request", function ()
+    {pm.expect(responseData.salary).to.eql(+requestData.salary);});
+- ctrl+s
+- ctrl+Enter
+
+### Перейти во вкладку Test Results:
+    PASS Salary from response equals salary from request
+### 3.8 Вывести в консоль параметр family из response
+    console.log(responseData.family)
+- ctrl+s
+- ctrl+Enter
+### Console:
+    {children: [2], pets: {…}, u_salary_1_5_year: 8000}
+        children: [2]
+            0: [2]
+                0: "Alex"
+                1: 24
+            1: [2]
+                0: "Kate"
+                1: 12
+        pets: {…}
+            cat: {…}
+                age: 3
+                name: "Sunny"
+            dog: {…}
+                age: 4
+                name: "Luky"
+        u_salary_1_5_year: 8000
+### 3.9 Проверить, что у параметра dog есть параметры name
+
+### 3.10 Проверить, что у параметра dog есть параметры age
+### 3.11 Проверить, что параметр name имеет значение Luky
+### 3.12 Проверить, что параметр age имеет значение 4
 ___
 ## http://162.55.220.72:5005/object_info_4
 ### 1. Отправить запрос
 ### 2. Статус код 200
 ### 3. Спарсить response body в json
 ### 4. Спарсить request
-### 5. Проверить, что name в ответе равно name s request (name забрать из request)
+### 5. Проверить, что name в ответе равно name в request (name забрать из request)
 ### 6. Проверить, что age в ответе равно age из request (age забрать из request)
 ### 7. Вывести в консоль параметр salary из request
 ### 8. Вывести в консоль параметр salary из response
