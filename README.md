@@ -732,46 +732,191 @@ ___
     "6000"
 ___
 ### http://162.55.220.72:5005/user_info_2
+- Cоздать запрос POST
+- Переименовать запрос в "2": ctrl+E
+- В поле Request URL ввести протокол, ip, порт, эндпоинт: http://162.55.220.72:5005/user_info_2
+- Во вкладке Body -> form-data ввести ключи:
+
+|Key   |
+|:----:|
+|name  |
+|age   |
+|salary|
+
+Выбрано окружение Homework_2
 ### 5.1 Вставить параметр salary из окружения в request
-
+|Value     |
+|:--------:|
+|{{salary}}|
 ### 5.2 Вставить параметр age из окружения в age
-
+|Value  |
+|:-----:|
+|{{age}}|
 ### 5.3 Вставить параметр name из окружения в name
-
+|Value   |
+|:------:|
+|{{name}}|
 ### 5.4 Отправить запрос
-
+- ctrl+s
+- ctrl+Enter
+### Response: 
+    {"person": {"u_age": 30,
+                "u_name": ["Natalya",2000,30],
+                "u_salary_5_years": 8400.0},
+     "qa_salary_after_1.5_year": 6600.0,
+     "qa_salary_after_12_months": 5400.0,
+     "qa_salary_after_3.5_years": 7600.0,
+     "qa_salary_after_6_months": 4000,
+     "start_qa_salary": 2000}
 ### 5.5 Статус код 200
-
+- Перейти на вкладку Tests
+- Выбрать сниппет "Status code: Code is 200":
+  
+      pm.test("Status code is 200", function ()
+      {pm.response.to.have.status(200);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Status code is 200
 ### 5.6 Спарсить response body в json
+- Из сниппета "Response body: JSON value check" выбрать строку, отредактировав название переменной:
+    
+      let responseData = pm.response.json();
 
+- Вывести результат в консоль:
+  
+      console.log(responseData)
+- ctrl+s
+- ctrl+Enter
+### Console:
+    
+    {person: {…}, qa_salary_after_1.5_year: 6600, qa_salary_after_12_months: 5400…}
+        person: {…}
+        u_age: 30
+        u_name: [3]
+            0: "Natalya"
+            1: 2000
+            2: 30
+        u_salary_5_years: 8400
+        qa_salary_after_1.5_year: 6600
+        qa_salary_after_12_months: 5400
+        qa_salary_after_3.5_years: 7600
+        qa_salary_after_6_months: 4000
+        start_qa_salary: 2000
 ### 5.7 Спарсить request
-
+    let requestData = request.data;
+    console.log(requestData)
+- ctrl+s
+- ctrl+Enter
+### Console:
+    {name: "Natalya", age: "30", salary: "2000"}
+        name: "Natalya"
+        age: "30"
+        salary: "2000"
 ### 5.8 Проверить, что json response имеет параметр start_qa_salary
-
+    pm.test("Response has start_qa_salary", function()
+    {pm.expect(responseData).to.have.property("start_qa_salary");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has start_qa_salary
 ### 5.9 Проверить, что json response имеет параметр qa_salary_after_6_months
-
+    pm.test("Response has qa_salary_after_6_months", function()
+    {pm.expect(responseData).to.have.property("qa_salary_after_6_months");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has qa_salary_after_6_months
 ### 5.10 Проверить, что json response имеет параметр qa_salary_after_12_months
-
+    pm.test("Response has qa_salary_after_12_months", function()
+    {pm.expect(responseData).to.have.property("qa_salary_after_12_months");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has qa_salary_after_12_months
 ### 5.11 Проверить, что json response имеет параметр qa_salary_after_1.5_year
-
+    pm.test("Response has qa_salary_after_1.5_year", function()
+    {pm.expect(responseData).to.have.property("qa_salary_after_1.5_year");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has qa_salary_after_1.5_year
 ### 5.12 Проверить, что json response имеет параметр qa_salary_after_3.5_years
-
+    pm.test("Response has qa_salary_after_3.5_years", function()
+    {pm.expect(responseData).to.have.property("qa_salary_after_3.5_years");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has qa_salary_after_3.5_years
 ### 5.13 Проверить, что json response имеет параметр person
-
+    pm.test("Response has person", function()
+    {pm.expect(responseData).to.have.property("person");});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Response has person
 ### 5.14 Проверить, что параметр start_qa_salary равен salary из request (salary забрать из request)
-
+    pm.test("Start_qa_salary from response equals salary from request", function ()
+    {pm.expect(responseData.start_qa_salary).to.eql(+requestData.salary);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Start_qa_salary from response equals salary from request
 ### 5.15 Проверить, что параметр qa_salary_after_6_months равен salary*2 из request (salary забрать из request)
-
+    pm.test("Qa_salary_after_6_months from response equals salary*2 from request", function ()
+    {pm.expect(responseData.qa_salary_after_6_months).to.eql(requestData.salary*2);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Qa_salary_after_6_months from response equals salary*2 from request
 ### 5.16 Проверить, что параметр qa_salary_after_12_months равен salary*2.7 из request (salary забрать из request)
-
+    pm.test("Qa_salary_after_12_months from response equals salary*2.7 from request", function ()
+    {pm.expect(responseData.qa_salary_after_12_months).to.eql(requestData.salary*2.7);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Qa_salary_after_12_months from response equals salary*2.7 from request
 ### 5.17 Проверить, что параметр qa_salary_after_1.5_year равен salary*3.3 из request (salary забрать из request)
-
+    pm.test("Qa_salary_after_1.5_year from response equals salary*3.3 from request", function ()
+    {pm.expect(responseData["qa_salary_after_1.5_year"]).to.eql(requestData.salary*3.3);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Qa_salary_after_1.5_year from response equals salary*3.3 from request
 ### 5.18 Проверить, что параметр qa_salary_after_3.5_years равен salary*3.8 из request (salary забрать из request)
-
+    pm.test("Qa_salary_after_3.5_years from response equals salary*3.8 from request", function ()
+    {pm.expect(responseData["qa_salary_after_3.5_years"]).to.eql(requestData.salary*3.8);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Qa_salary_after_3.5_years from response equals salary*3.8 from request
 ### 5.19 Проверить, что в параметре person, 1-й элемент из u_name равен salary из request (salary забрать из request)
-
+    pm.test("Person's u_name[1] from response equals salary from request", function ()
+    {pm.expect(responseData.person.u_name[1]).to.eql(+requestData.salary);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Person's u_name[1] from response equals salary from request
 ### 5.20 Проверить, что что параметр u_age равен age из request (age забрать из request)
-
+    pm.test("Person's u_name from response equals salary from request", function ()
+    {pm.expect(responseData.person.u_age).to.eql(requestData.age);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Person's u_name from response equals salary from request
 ### 5.21 Проверить, что параметр u_salary_5_years равен salary*4.2 из request (salary забрать из request)
+    pm.test("Person's u_salary_5_years from response equals salary*4.2 from request", function ()
+    {pm.expect(responseData.person.u_salary_5_years).to.eql(requestData.salary*4.2);});
+- ctrl+s
+- ctrl+Enter
+### Перейти во вкладку Test Results:
+    PASS Person's u_salary_5_years from response equals salary*4.2 from request
+
+
+
 
 ### 5.22 Написать цикл который выведет в консоль по порядку элементы списка из параметра person
+
+
+### Console:
+
