@@ -911,12 +911,12 @@ ___
 - ctrl+Enter
 ### Перейти во вкладку Test Results:
     PASS Person's u_salary_5_years from response equals salary*4.2 from request
-
-
-
-
 ### 5.22 Написать цикл который выведет в консоль по порядку элементы списка из параметра person
-
-
+    for (let person in responseData.person)
+    {console.log(person)}
 ### Console:
+ 
+    "u_age"
+    "u_name"
+    "u_salary_5_years"
 
